@@ -1,99 +1,132 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# MyNest 项目
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 项目概述
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+MyNest 是一个基于 NestJS 框架开发的后端应用程序，提供用户认证、二维码登录和算法题库管理等功能。该项目采用了模块化的架构设计，使用 TypeORM 进行数据库操作，JWT 进行身份验证，并集成了 Swagger 用于 API 文档生成。
 
-## Description
+## 技术栈
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **框架**：NestJS 10.x
+- **数据库**：MySQL (通过 TypeORM 连接)
+- **认证**：JWT (JSON Web Token)
+- **API 文档**：Swagger
+- **其他工具**：QRCode 生成、加密工具等
 
-## Project setup
+## 功能模块
 
-```bash
-$ pnpm install
-```
+### 用户模块 (User Module)
 
-## Compile and run the project
+用户模块负责处理用户注册、登录和身份验证相关功能。
 
-```bash
-# development
-$ pnpm run start
+- **注册功能**：支持用户通过手机号、昵称和密码进行注册
+- **登录功能**：支持用户通过手机号和密码进行登录，登录成功后返回 JWT token
+- **JWT 认证**：使用 JWT 策略进行用户身份验证
 
-# watch mode
-$ pnpm run start:dev
+### 二维码模块 (QRCode Module)
 
-# production mode
-$ pnpm run start:prod
-```
+二维码模块提供二维码生成和扫码登录相关功能。
 
-## Run tests
+- **二维码生成**：生成包含登录链接的二维码图片
+- **二维码状态管理**：支持查询、更新二维码状态（未扫描、已扫描待确认、已确认、已取消、已过期）
+- **扫码登录流程**：支持完整的扫码登录流程，包括扫描、确认和取消操作
 
-```bash
-# unit tests
-$ pnpm run test
+### 算法模块 (Algorithm Module)
 
-# e2e tests
-$ pnpm run test:e2e
+算法模块用于管理和提供算法题库相关功能。
 
-# test coverage
-$ pnpm run test:cov
-```
+- **题库列表**：获取算法题库中的所有题目
+- **题目管理**：支持题目的增删改查操作
 
-## Deployment
+## 安装与运行
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### 前置条件
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+- Node.js (v14 或更高版本)
+- MySQL 数据库
+
+### 安装步骤
+
+1. 克隆项目到本地
 
 ```bash
-$ pnpm install -g mau
-$ mau deploy
+git clone <项目仓库地址>
+cd mynest
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+2. 安装依赖
 
-## Resources
+```bash
+npm install
+# 或使用 pnpm
+pnpm install
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+3. 配置数据库
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+在 `src/app.module.ts` 中修改数据库连接配置：
 
-## Support
+```typescript
+TypeOrmModule.forRoot({
+  type: 'mysql',
+  host: '127.0.0.1',
+  port: 3306,
+  username: 'root',
+  password: 'your_password',
+  database: 'test',
+  synchronize: true,
+  autoLoadEntities: true,
+})
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+4. 启动应用
 
-## Stay in touch
+```bash
+# 开发模式
+npm run start:dev
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# 生产模式
+npm run build
+npm run start:prod
+```
 
-## License
+应用将在 http://localhost:3000 上运行。
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## API 文档
+
+启动应用后，可以通过访问 http://localhost:3000/api 查看 Swagger API 文档。
+
+## 项目结构
+
+```
+src/
+├── algorithm/         # 算法模块
+│   ├── dto/           # 数据传输对象
+│   ├── entities/      # 实体类
+│   ├── question_bank/ # 题库文件
+├── qrcode/            # 二维码模块
+│   ├── dto/           # 数据传输对象
+├── user/              # 用户模块
+│   ├── dto/           # 数据传输对象
+│   ├── entities/      # 实体类
+├── utils/             # 工具函数
+├── app.module.ts      # 应用主模块
+├── main.ts            # 应用入口
+```
+
+## 功能演示
+
+### 二维码登录流程
+
+1. 客户端请求生成二维码：`GET /qrcode/generate`
+2. 用户扫描二维码：`GET /qrcode/scan?id=xxx`
+3. 用户确认或取消授权：`GET /qrcode/confirm?id=xxx` 或 `GET /qrcode/cancel?id=xxx`
+4. 客户端轮询二维码状态：`GET /qrcode/check?id=xxx`
+
+### 用户注册与登录
+
+1. 用户注册：`POST /user/register`
+2. 用户登录：`POST /user/login`
+
+## 许可证
+
+[MIT](LICENSE)
